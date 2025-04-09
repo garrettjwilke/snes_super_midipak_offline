@@ -1,0 +1,151 @@
+#i39 {
+    display: flex;
+    margin: 1em;
+    align-items: center;
+}
+
+#i47 {
+    margin: 1em;
+}
+
+#sample_uploader {
+    display: flex;
+}
+
+#sample_uploader > * {
+    padding: 1em;
+    border-width: 1px;
+    border-style: solid;
+    width: 100%;
+}
+
+button.i308 {
+    font-weight: bold;
+}
+
+#i57 {
+    text-align: right;
+    margin: 0.5em 0;
+    flex-grow: 1;
+}
+
+#i123  {
+    margin: 0.5em 0;
+}
+
+#i62 {
+    display: flex;
+}
+
+#i63 {
+    margin: 1em;
+}
+
+#i84 {
+    flex-grow: 1;
+}
+
+#i63 a:visited {
+    color: LinkText;
+}
+
+#i63 a.selected {
+    color: inherit;
+    text-decoration: inherit;
+    cursor: default;
+}
+
+.i265 {
+    display: table;
+}
+
+.i266 {
+    display: table-row;
+}
+
+.i266 > span {
+    display: table-cell;
+}
+
+.i266 > span:first-child {
+    padding-right: 1em;
+}
+
+.i266 input[type=range] {
+    width: 250px;
+}
+
+.i266 input[type=number] {
+    width: 4em;
+}
+
+#i56 img {
+    height: 32px;
+    width: 32px;
+}
+
+.i306 select {
+    width: 100%;
+    max-width: fit-content;
+}
+
+.i284 { display: none; }
+.i284:target ~ #sample_uploader { display: none; }
+.i284:target { display: block; }
+
+.i321 {
+    margin-top: 1em;
+}
+
+label {
+  -webkit-user-select: none;  /* Chrome all / Safari all */
+  -moz-user-select: none;     /* Firefox all */
+  -ms-user-select: none;      /* IE 10+ */
+}
+
+.i318 {
+  height: 2em;
+  width: 100%;
+  border-size: 2px;
+  border-style: dashed;
+  margin: 0.5em 0;
+}
+
+.i319 {
+  cursor: drag;
+}
+
+.i320 td {
+  text-align: center;
+}
+
+/* NB: at the bottom because we always want it to override */
+.i283 {
+    display: none;
+}
+
+#i2, #i18,
+#i113, #i114 {
+    color: red;
+}
+
+@media (prefers-color-scheme: dark) {
+    body {
+        background: rgb(21, 32, 43);
+        color: #fff;
+        border-color: #fff;
+    }
+
+    a {
+        color: rgb(29, 155, 240);
+    }
+
+    #i63 a:visited     {
+        color: rgb(29, 155, 240);
+    }
+
+    #i63 a.selected {
+        color: inherit;
+    }
+}
+

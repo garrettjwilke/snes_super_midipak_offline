@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="color-scheme" content="dark light">
+    <title>Super MIDI Pak Workstation</title>
+    <script async type="module" src="index.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index.css">
+    <link rel="manifest" href="manifest.json" crossorigin="use-credentials">
+  </head>
+  <body>
+    <h1>Super MIDI Pak Workstation</h1>
+    <dialog id="i0">
+      <h3 style="margin-top: 0px" id="i1">Sample Encoding Parameters</h3>
+      <p style="font-style: italic;">
+        All of these parameters are explained in <a target="_blank" href="https://www.supermidipak.com/doc/#sample_encoding_params">the documentation</a>.
+      </p>
+      <p id="i2" class="i264"></p>
+      <form id="i3" method="dialog">
+        <div class="i265">
+          <div class="i266" id="i4">
+            <span><label for="i5">Loop duration (in milliseconds):</label></span>
+            <span><input id="i5" type="text" placeholder="0"></span>
+          </div>
+          <div class="i266" id="i6">
+            <span><label for="i7">Dither seed:</label></span>
+            <span><input id="i7" type="text" placeholder="1"></span>
+          </div>
+          <div class="i266" id="i8">
+            <span><label for="i9">Dither gain (in bits):</label></span>
+            <span><input id="i9" type="text" placeholder="0"></span>
+          </div>
+          <div class="i266" id="i10">
+            <span><label for="i11">Pad sample:</label></span>
+            <span><input id="i11" type="checkbox"></span>
+          </div>
+          <div class="i266" id="i12">
+            <span><label for="i13">Compensate for interpolation:</label></span>
+            <span><input id="i13" type="checkbox"></span>
+          </div>
+        </div>
+        <div style="margin: 1em 0 1em 1em;">
+          <button id="i14" value="submit">Submit</button>
+          <button id="i15" type="button">Cancel</button>
+        </div>
+      </form>
+    </dialog>
+    <dialog id="i16">
+      <h3 style="margin-top: 0px" id="i17">Settings</h3>
+      <p id="i18" class="i264"></p>
+      <form method="dialog">
+        <div class="i265">
+          <div class="i266">
+            <span><label for="i19">Root Pitch:</label></span>
+            <span><input id="i19" type="text" placeholder="C4"></span>
+          </div>
+
+          <div class="i266">
+            <span><label for="i21">Volume Envelope Attack Time</label></span>
+            <span>
+              <input type="number" min="0" max="127" id="i20">
+              <input id="i21" type="range" min="0" max="127" step="1">
+            </span>
+          </div>
+
+          <div class="i266">
+            <span><label for="i23">Volume Envelope Decay Time</label></span>
+            <span>
+              <input type="number" min="0" max="127" id="i22">
+              <input id="i23" type="range" min="0" max="127" step="1">
+            </span>
+          </div>
+
+          <div class="i266">
+            <span><label for="i25">Volume Envelope Sustain Level</label></span>
+            <span>
+              <input type="number" min="0" max="127" id="i24">
+              <input id="i25" type="range" min="0" max="127" step="1">
+            </span>
+          </div>
+
+          <div class="i266">
+            <span><label for="i27">Volume Envelope Sustain Time</label></span>
+            <span>
+              <input type="number" min="0" max="127" id="i26">
+              <input id="i27" type="range" min="0" max="127" step="1">
+            </span>
+          </div>
+
+          <div class="i266">
+            <span><label for="i29">Pitch Envelope Attack Time</label></span>
+            <span>
+              <input type="number" min="0" max="16383" id="i28">
+              <input id="i29" type="range" min="0" max="16383" step="1">
+            </span>
+          </div>
+
+          <div class="i266">
+            <span><label for="i31">Pitch Envelope Decay Time</label></span>
+            <span>
+              <input type="number" min="0" max="16383" id="i30">
+              <input id="i31" type="range" min="0" max="16383" step="1">
+            </span>
+          </div>
+
+          <div class="i266">
+            <span><label for="i33">Pitch Envelope Amount (Center 0)</label></span>
+            <span>
+              <input type="number" min="0" max="16383" id="i32">
+              <input id="i33" type="range" min="0" max="16383" step="1" list="i137">
+            </span>
+          </div>
+
+          <div class="i266">
+            <span><label for="i34">Sample Start Offset (in ms)</label></span>
+            <span><input id="i34" type="text" placeholder="0"></span>
+          </div>
+
+          <div class="i266">
+            <span><label for="i35">Loop Start Offset (in ms)</label></span>
+            <span><input id="i35" type="text" placeholder="0"></span>
+          </div>
+        </div>
+        <div style="margin: 1em 0 1em 1em;">
+          <button id="i36" value="submit">Submit</button>
+          <button id="i37" value="cancel">Cancel</button>
+          <button id="i38" value="send_now">Send Patch Settings Now (except start offsets)</button>
+        </div>
+      </form>
+    </dialog>
+    <div id="i39">
+      <div>
+        <div>
+          <label for="i41"><span style="border-width: 1px; border-style: solid; background-color: darkred; padding-left: 1em" id="i40"></span> MIDI Input Port:</label>
+          <select id="i41">
+          </select>
+        </div>
+        <div>
+          <label for="i43"><span style="border-width: 1px; border-style: solid; background-color: darkgreen; padding-left: 1em" id="i42"></span> MIDI Output Port: </label>
+          <select id="i43">
+          </select>
+        </div>
+        <div>
+          <label for="i45"><span style="border-width: 1px; border-style: solid; background-color: darkblue; padding-left: 1em" id="i44"></span> Web App MIDI Input Port:</label>
+          <select id="i45">
+          </select>
+        </div>
+        <p id="i46" style="font-size: smaller; font-style: italic; display: none;">
+          Not finding your MIDI device? See the <a href="/doc/#on_windows">documentation</a>.
+        </p>
+      </div>
+      <div id="i47">
+        <button id="i48">Upload Session to Synth</button>
+        <button id="i49">All Notes Off</button>
+        <button data-i140="Clearing firmware..." data-i141="Uploading firmware %p..." data-i142="Getting version number..." data-i143="Downloading firmware..." style="display: none;" id="i50">Upgrade Firmware</button>
+        <button data-i144="Saving settings..." id="i51">Save Settings on Synth</button>
+        <button data-i145="Loading saved settings..." id="i52">Load Saved Settings on Synth</button>
+        <button data-i145="Loading factory settings..." id="i53">Load Factory Settings on Synth</button>
+        <button data-i141="Uploading SPC..." id="i54">Upload SPC</button>
+        <button data-i146="Converting MIDI file..." id="i55">Convert MIDI to SPC (BETA)</button>
+      </div>
+      <div id="i56" class="i283">
+        <img src="loading.gif">
+      </div>
+      <div id="i57">
+        <button id="i58">Export Session</button>
+        <button id="i59">Export Session As MIDI</button>
+        <button id="i60">Import Session</button>
+        <button id="i61">Clear Session</button>
+      </div>
+    </div>
+    <div id="i62">
+      <div id="i63">
+        <ul>
+          <li><a href="#sample_uploader" id="i64">Sample Uploader</a></li>
+          <li><a href="#global_settings" id="i65">Global Settings</a></li>
+          <li><a href="#echo_settings" id="i66">Echo Settings</a></li>
+          <li><a href="#custom_tunings" id="i67">Custom Tunings</a></li>
+          <li><a href="#channel_1_settings" id="i68">Channel 1 Settings</a></li>
+          <li><a href="#channel_2_settings" id="i69">Channel 2 Settings</a></li>
+          <li><a href="#channel_3_settings" id="i70">Channel 3 Settings</a></li>
+          <li><a href="#channel_4_settings" id="i71">Channel 4 Settings</a></li>
+          <li><a href="#channel_5_settings" id="i72">Channel 5 Settings</a></li>
+          <li><a href="#channel_6_settings" id="i73">Channel 6 Settings</a></li>
+          <li><a href="#channel_7_settings" id="i74">Channel 7 Settings</a></li>
+          <li><a href="#channel_8_settings" id="i75">Channel 8 Settings</a></li>
+          <li><a href="#channel_9_settings" id="i76">Channel 9 Settings</a></li>
+          <li><a href="#channel_10_settings" id="i77">Channel 10 Settings</a></li>
+          <li><a href="#channel_11_settings" id="i78">Channel 11 Settings</a></li>
+          <li><a href="#channel_12_settings" id="i79">Channel 12 Settings</a></li>
+          <li><a href="#channel_13_settings" id="i80">Channel 13 Settings</a></li>
+          <li><a href="#channel_14_settings" id="i81">Channel 14 Settings</a></li>
+          <li><a href="#channel_15_settings" id="i82">Channel 15 Settings</a></li>
+          <li><a href="#channel_16_settings" id="i83">Channel 16 Settings</a></li>
+        </ul>
+      </div>
+      <div id="i84">
+        
+        <div id="global_settings" class="i284" data-i147="Global Settings">
+          <h2>Global Settings</h2>
+          <div id="i85"></div>
+        </div>
+        <div id="channel_1_settings" class="i284" data-i147="Channel 1 Settings"><div id="i86"></div></div>
+        <div id="channel_2_settings" class="i284" data-i147="Channel 2 Settings"><div id="i87"></div></div>
+        <div id="channel_3_settings" class="i284" data-i147="Channel 3 Settings"><div id="i88"></div></div>
+        <div id="channel_4_settings" class="i284" data-i147="Channel 4 Settings"><div id="i89"></div></div>
+        <div id="channel_5_settings" class="i284" data-i147="Channel 5 Settings"><div id="i90"></div></div>
+        <div id="channel_6_settings" class="i284" data-i147="Channel 6 Settings"><div id="i91"></div></div>
+        <div id="channel_7_settings" class="i284" data-i147="Channel 7 Settings"><div id="i92"></div></div>
+        <div id="channel_8_settings" class="i284" data-i147="Channel 8 Settings"><div id="i93"></div></div>
+        <div id="channel_9_settings" class="i284" data-i147="Channel 9 Settings"><div id="i94"></div></div>
+        <div id="channel_10_settings" class="i284" data-i147="Channel 10 Settings"><div id="i95"></div></div>
+        <div id="channel_11_settings" class="i284" data-i147="Channel 11 Settings"><div id="i96"></div></div>
+        <div id="channel_12_settings" class="i284" data-i147="Channel 12 Settings"><div id="i97"></div></div>
+        <div id="channel_13_settings" class="i284" data-i147="Channel 13 Settings"><div id="i98"></div></div>
+        <div id="channel_14_settings" class="i284" data-i147="Channel 14 Settings"><div id="i99"></div></div>
+        <div id="channel_15_settings" class="i284" data-i147="Channel 15 Settings"><div id="i100"></div></div>
+        <div id="channel_16_settings" class="i284" data-i147="Channel 16 Settings"><div id="i101"></div></div>
+        <div id="custom_tunings" class="i284" data-i147="Custom Tunings">
+          <h2>Custom Tunings</h2>
+
+          <p>
+            <button id="i102">Reupload All Tunings</button>
+            <button id="i103">Import and Upload TUN File</button>
+          </p>
+
+          <table border="1">
+            <thead>
+              <tr>
+                <td>MIDI Key</td>
+                <td>Tuning (in semitones)</td>
+              </tr>
+            </thead>
+            <tbody id="i104">
+            </tbody>
+          </table>
+
+        </div>
+        <div id="echo_settings" class="i284" data-i147="Echo Settings">
+          <h2>Echo Settings</h2>
+          <p style="font-style: italic;">
+            You can watch a <a target="_blank" href="https://www.youtube.com/watch?v=oMOS0epyzZY">YouTube video</a> that goes into the full detail of how to use this tool.
+          </p>
+          <p>
+            <button id="i105" data-i141="Importing...">Import Echo Settings from SPC</button>
+          </p>
+          <div style="display: inline-block; margin-right: 1em;vertical-align: top;">
+            <div>
+              <span style="font-weight: bold;">Plot Channel:</span>
+              <label for="i106">Left</label><input type="radio" id="i106" name="graph_display" value="left">
+              <label for="i107">Right</label><input type="radio" id="i107" name="graph_display" value="right">
+            </div>
+            <div id="i108">
+              
+            </div>
+            <div id="i109">
+              <h3>Band Pass Filter</h3>
+              <div>
+                <span style="font-weight: bold;">Preserve Master Volume:</span>
+                <label for="i110">Yes</label><input type="radio" id="i110" name="preserve_mvol_selection" value="yes" checked>
+                <label for="i111">No</label><input type="radio" id="i111" name="preserve_mvol_selection" value="no">
+              </div>
+              
+            </div>
+            <div id="i112">
+              <h3>Feedback-Based Band Pass Filter</h3>
+              
+            </div>
+            <div id="i113" style="font-weight: bold;" class="i283">
+              Output is unstable, echo feedback is too high!
+            </div>
+            <div id="i114" style="font-weight: bold;" class="i283">
+              FIR sum overflows, distortion may occur!
+            </div>
+          </div>
+
+          <div style="display: inline-block;">
+            <h3>Pole-Zero Plot</h3>
+            <p>
+              Double click to reset zoom. Ctrl + mouse wheel to zoom.
+            </p>
+            <canvas id="i115" width="640" height="480"></canvas>
+          </div>
+
+          <div style="display: inline-block;">
+            <h3>Magnitude Response</h3>
+            <canvas id="i116" width="640" height="480"></canvas>
+          </div>
+
+          <div style="display: inline-block;">
+            <h3>Group Delay</h3>
+            <canvas id="i117" width="640" height="480"></canvas>
+          </div>
+        </div>
+        <div id="sample_uploader" class="i284" data-i147="Sample Uploader">
+          <div id="i118">
+            Sample Directory:
+            <div>
+              <button id="i119">Select All</button>
+              <button disabled id="i120">Edit Selected Patch Settings</button>
+            </div>
+            <div id="i121">
+            </div>
+            <div>
+              <button id="i122">Add Directory Entry</button>
+            </div>
+            <div id="i123">
+              <div>
+                Directory Size: <span id="i124"></span> bytes
+              </div>
+              <div>
+                Total Memory Used: <span id="i125"></span> / <span id="i126"></span>
+                (<span id="i127"></span>)
+              </div>
+              <div>Echo buffer can start at address <span id="i128"></span> (set <code>ESA</code> to <code id="i129"></code>). Max safe <code>EDL</code> value is <code id="i130"></code>.</div>
+            </div>
+            <div>
+              <div>
+                <button id="i131" disabled>Upload</button>
+                <input type="checkbox" id="i132" checked>
+                <label for="i132">Set <code>ESA</code> on upload (Resets EDL to 0)</label>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div>
+              Sample Catalogue:
+              <div>
+                <button data-i148="Importing Samples(s)..." id="i133">Import Samples (SPC, SF2, WAV, BRR, etc.)</button>
+                <button id="i134">Add Entire Catalogue to Sample Directory</button>
+              </div>
+            </div>
+            <div id="i135">
+            </div>
+          </div>        
+        </div>
+      </div>
+    </div>
+    <div id="i136" data-i149="Rename" data-i150="Preview" data-i151="Add to directory" data-i152="X" data-i153="Playing" data-i154="%s (%d bytes)" data-i155="Please enter a new name for: &quot;%s&quot;" data-i156="%d bytes (%p)" data-i157="Patch Settings" data-i158="Preview Drum Kit Key" data-i159="Master Volume Left" data-i160="Master Volume Right" data-i161="Echo Volume Left" data-i162="Echo Volume Right" data-i163="Echo Feedback" data-i164="Echo Delay" data-i165="FIR0" data-i166="FIR1" data-i167="FIR2" data-i168="FIR3" data-i169="FIR4" data-i170="FIR5" data-i171="FIR6" data-i172="FIR7" data-i173="Omni Mode" data-i174="Polyphonic Mode" data-i175="Center Frequency" data-i176="Filter Width" data-i177="Center Frequency" data-i178="Resonance" data-i179="Pan (Center 0)" data-i180="Volume" data-i181="Expression" data-i182="Attack Time" data-i183="Decay Time" data-i184="Sustain Level" data-i185="Sustain Time" data-i186="Vibrato Intensity" data-i187="Vibrato Rate" data-i188="Portamento Time" data-i189="Portamento Time (Fine)" data-i190="Portamento Enable" data-i191="Sostenuto Enable" data-i192="Sustain Enable" data-i193="Legato Enable" data-i194="Noise Enable" data-i195="Echo Enable" data-i196="Sample" data-i197="Drum Kit Mode Enable" data-i198="Pitch Envelope Attack Time" data-i199="Pitch Envelope Decay Time" data-i200="Pitch Envelope Amount (Center 0)" data-i201="Override Sample Patch Settings" data-i202="Override Pan" data-i203="Global Settings" data-i204="Channel %d Settings" data-i205="Sample #%d" data-i206="&lt;Select Sample&gt;" data-i207="Select All" data-i208="Deselect All" data-i209="Directory Entry #%d" data-i210="Use without input port" data-i211="Use without output port" data-i212="MIDI access denied" data-i213="Left Balance" data-i214="Right Balance" data-i215="Voices Usable by Channel" data-i216="Please enter a new root pitch (real number between 0 and 128 or note name, e.g. C4, 60 = C4):" data-i217="Please enter a new unused directory index (integer between 0 and 255, inclusive):" data-i218="You already have the latest version, are you sure you want to upgrade? Cancel if not" data-i219="Enter artist name:" data-i220="Enter song title:" data-i221="Enter session file name:" data-i222="Please enter your upgrade code:" data-i223="Enter the note quantization period (in ms). Use higher values if your songs are getting cut off midway through. Entering nothing reduces quantization to a minimum." data-i224="Enter time stamp (in ms) where the loop starts. Leaving blank or entering 0 will loop from the beginning of the track." data-i225="Sample directory is full!" data-i226="Failed to import sample &quot;%s&quot;: %s" data-i227="MIDI access denied. Please allow next time." data-i228="Upload complete" data-i229="Upload failed: %s" data-i230="No MIDI output selected!" data-i231="Reset failed: %s" data-i232="Upgrade failed: %s" data-i233="Upgrade over USB failed, try upgrading using the MIDI ports instead." data-i234="Failed to load session: %s" data-i235="No MIDI support in your browser. Upload will not work" data-i236="Failed MIDI to SPC conversion: %s" data-i237="Load settings failed: %s" data-i238="Save settings failed: %s" data-i239="A MIDI input is required for upgrade!" data-i240="The TUN file is invalid!" data-i241="ESA value is too large, reduce memory!" data-i242="bad MIDI header length value, 6 (expected) vs %d" data-i243="Non-supported MIDI header format value, 0,1 (expected) vs %d" data-i244="ticks per frame timing is not supported" data-i245="Bad MIDI track header: %s" data-i246="Bad MIDI file header: %s" data-i247="Bad ROM Image!" data-i248="Put console in upgrade mode! Hold Select + Left Shoulder while resetting console." data-i249="Bad session file" data-i250="Invalid upgrade code" data-i251="Unknown error: %d" data-i252="Timeout! Is your MIDI input port set correctly? If so, try it without an input port" data-i253="Cancelled!" data-i254="Failed!" data-i255="Uploading SPC Failed! %s" data-i256="Invalid root pitch format. Must be a MIDI Pitch or note name" data-i257="Sample start offset must be a multiple of 0.5ms" data-i258="Loop start offset must be a multiple of 0.5ms" data-i259="Loop duration is not a positive number or 0!" data-i260="Loop duration must be in 0.5 ms increments! (e.g. 0.5, 1, 1.5, etc.)" data-i261="Dither seed it not a whole number!" data-i262="Dither seed must be positive and less than 4294967296" data-i263="Dither gain it not a number!" style="display: none">
+      
+      <span class="i306 i307 i308 i266 i265 i311 i283"></span>
+      <span class="i313 i314 i315 i316 i317 i318 i319 i320 i321"></span>
+      <datalist id="i137">
+        <option>8192</option>
+      </datalist>
+      <datalist id="i138">
+        <option>64</option>
+      </datalist>
+      <datalist id="i139">
+        <option>0</option>
+      </datalist>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,34 @@
+{
+  "name": "ep133sampletool",
+  "productName": "EP-133 Sample Tool",
+  "version": "VERSION_NUMBER",
+  "description": "EP-133 Sample Tool - VERSION_NUMBER",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron . --ozone-platform=wayland",
+    "package": "electron-builder"
+  },
+  "build": {
+    "appId": "com.ep133.sampletool",
+    "linux": {
+      "category": "tool",
+      "executableName": "ep133sampletool",
+      "artifactName": "${productName}-${version}.${ext}"
+    },
+    "win": {
+      "target": ["zip"]
+    }
+  },
+  "keywords": [
+    "teenage",
+    "engineering",
+    "ep-133",
+    "sample",
+    "tool"
+  ],
+  "author": "homeless",
+  "devDependencies": {
+    "electron": "^31.3.1",
+    "electron-builder": "^24.13.3"
+  }
+}
